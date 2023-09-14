@@ -1,7 +1,7 @@
 {
-  "name": "vitereact",
+  "name": "blog-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Habeeb Moosa's Blog",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "node api/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Habeeb Moosa",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
