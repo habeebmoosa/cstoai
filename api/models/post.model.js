@@ -6,6 +6,11 @@ const postSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    url:{
+        type: String,
+        required: true,
+        unique: true
+    },
     description:{
         type: String,
         required: true,
@@ -18,9 +23,13 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    categories:{
-        type: Array,
+    tags:{
+        type: [String],
         required: false
+    },
+    views:{
+        type: Number,
+        default: 0
     },
     createdDate:{
         type: Date,
@@ -28,4 +37,4 @@ const postSchema = new mongoose.Schema({
     }
 });
 
-export const Post = mongoose.model('Post', postSchema);
+export const Post = mongoose.model('posts', postSchema);
