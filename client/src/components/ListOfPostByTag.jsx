@@ -10,7 +10,6 @@ export const ListOfPostByTag = ()=>{
 
     const fetchData = async () => {
         try {
-            // const response = await Axios.get("http://localhost:3001/post/getpostbytag/" + tag);
             const response = await Axios.get(`${import.meta.env.VITE_API_BASE_URL}/post/getpostbytag/${tag}`);
             setPosts(response.data.reverse());
         } catch (error) {

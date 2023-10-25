@@ -21,7 +21,14 @@ const PostList = ({post}) => {
         <div className="flex flex-col lg:flex-row lg:space-5">
             <div className="max-w-md mx-auto lg:mx-0">
                 <Link to={"/"+post.url}>
-                    <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxvZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80" alt={post.title} className="w-full h-auto rounded-lg" />
+                    {/* <img src={`${import.meta.env.VITE_NOTFOUND_IMAGE}`} alt={post.title} className="w-full h-auto rounded-lg" /> */}
+                    <div>
+                {post.image ? (
+                    <img src={`${import.meta.env.VITE_API_BASE_URL}/images/${post.image.imgname}`} alt={post.title} className="w-full h-auto rounded-lg" />
+                ) : (
+                    <img src={`${import.meta.env.VITE_NOTFOUND_IMAGE}`} alt={post.title} className="w-full h-auto rounded-lg" />
+                )}
+            </div>
                 </Link>
             </div>
             <div className="mt-5 lg:mt-0 lg:ml-10 max-w-md">

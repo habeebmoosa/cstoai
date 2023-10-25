@@ -6,32 +6,48 @@ import { NotFound } from './404';
 export const PostPage = () => {
     const { url } = useParams();
     const [post, setPost] = useState({});
+    const [author, setAuthor] = useState({});
+    const [image, setImage] = useState("");
 
     useEffect(() => {
         const getPost = async () => {
             try {
-                const response = await Axios.get(`${import.meta.env.VITE_API_BASE_URL}/post/getpost/${url}`);        
-                setPost(response.data);
+                const response = await Axios.get(`${import.meta.env.VITE_API_BASE_URL}/post/getpost/${url}`);
+                setPost(response.data.post);
+                setAuthor(response.data.author);
                 console.log(response.data);
+
             } catch (error) {
                 console.log(error);
             }
         }
         getPost();
-    }, [url]);
+    }, []);
 
-    const imgUrlExample = "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxvZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80";
 
-    return post ? (
+
+    return Object.keys(post).length > 0 ? (
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <h1 className="text-3xl font-bold text-gray-900">{post.title}</h1>
             <p className="text-gray-500 mt-2">{post.description}</p>
-            <img src={imgUrlExample} alt={post.title} className="my-8 rounded-md" />
+
+            <div>
+                {post.image ? (
+                    <img src={`${import.meta.env.VITE_API_BASE_URL}/images/${post.image.imgname}`} alt={post.title} className="my-8 rounded-md" />
+                ) : (
+                    <img src={`${import.meta.env.VITE_NOTFOUND_IMAGE}`} alt={post.title} className="my-8 rounded-md" />
+                )}
+            </div>
 
             <div className="border-b-2 border-gray-200 mb-8"></div>
-
             <div className="flex flex-row justify-between mb-8">
-                <p className="text-gray-500 mt-2">By {post.username}</p>
+
+                <p className="text-gray-500 mt-2">By{" "}
+                    <Link to={"/author/" + author.username} className='hover:text-gray-700'>
+                        {author.name}
+                    </Link>
+                </p>
+
                 <p className="text-gray-500 mt-2">
                     {new Date(post.createdDate).toLocaleDateString("en-US", {
                         year: "numeric",
@@ -58,7 +74,7 @@ export const PostPage = () => {
                     }
                 </div>
             </div>
-        </div>
+        </div >
     ) : (
         <NotFound />
     );

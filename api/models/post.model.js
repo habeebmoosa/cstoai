@@ -15,6 +15,17 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    image:{
+        imgname: {
+            type: String,
+            required: false,
+            unique: true
+        },
+        imgpath:{
+            type: String,
+            required: false
+        }
+    },
     content:{
         type: String,
         required: true

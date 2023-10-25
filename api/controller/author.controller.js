@@ -1,4 +1,5 @@
 import { Author } from "../models/author.model.js";
+import { Post } from "../models/post.model.js";
 
 export const createAuthor = async (req, res)=>{
     try {
@@ -14,22 +15,10 @@ export const createAuthor = async (req, res)=>{
 export const getAuthor = async (req, res)=>{
     try {
         const username = req.params.username;
-        const author = await Author.findOne({username: username}).populate('posts');
-        // .exec(
-        //     (err, post)=>{
-        //         if(err){
-        //             return res.status(500).json(err);
-        //         }else{
-        //             return res.status(200).json(post);
-        //         }
-        //     }
-        // );
+        const author = await Author.findOne({username});
 
-        if(!author){
-            return res.status(404).json({message: 'Author not found'});
-        }
-
-        res.status(200).json(author);
+        const posts = await Post.find({username});
+        res.status(200).json({author, posts});
     } catch (error) {
         res.status(500).json(error);
     }

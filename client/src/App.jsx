@@ -8,6 +8,7 @@ import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import {PostPage} from './pages/PostPage';
 import { ListOfPostByTag } from './components/ListOfPostByTag';
+import { AuthorInfoAndPosts } from './components/AuthorInfoAndPosts';
 
 export default function App() {
   return (
@@ -18,7 +19,7 @@ export default function App() {
         <Route path='/:url' element={<PostPage/>} />
         <Route path="/about" element={<About/>} />
         <Route path="/contact" element={<Contact/>} />
-        {/* <Route path='/post' element={<PostPage />} /> */}
+        <Route path='/author/:username' element={<AuthorInfoAndPosts/>} />
         <Route path='/tags/:tag' element={<ListOfPostByTag/>} />
       </Routes>
       <Footer />
