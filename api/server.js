@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { postRoutes } from './routes/post.route.js';
 import cors from 'cors';
-import { contactRoutes } from './routes/pagesRoutes/contact.route.js';
+import { contactRoutes } from './routes/contact.route.js';
 import { authorRoutes } from './routes/author.route.js';
 
 const app = express();

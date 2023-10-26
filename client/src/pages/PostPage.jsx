@@ -66,7 +66,9 @@ export const PostPage = () => {
                     {
                         post.tags?.map((tag) => (
                             <Link to={"/tags/" + tag}>
-                                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mr-2 hover:bg-blue-200">
+                                <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10
+                        hover:bg-blue-100 hover:text-blue-800 mr-2 cursor-pointer
+                        ">
                                     {tag}
                                 </span>
                             </Link>

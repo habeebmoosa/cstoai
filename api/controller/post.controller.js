@@ -50,8 +50,16 @@ export const createPost = async (req, res) => {
 }
 
 export const readPosts = async (req, res) => {
+    const query = req.query;
     try {
-        const posts = await Post.find();
+        const searchFilter = {
+            title:{
+                $regex: query.search,
+                $options: 'i'
+            }
+        };
+
+        const posts = await Post.find(query.search?searchFilter:null);
         res.status(200).json(posts);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -74,6 +82,16 @@ export const readPost = async (req, res) => {
 export const readPostsByTag = async (req, res) => {
     try {
         const posts = await Post.find({ tags: req.params.tag });
+        res.status(200).json(posts);
+    } catch (error) {
+        res.status(404).json(error);
+    }
+}
+
+export const readPostsBySearch = async (req, res) => {
+    try {
+        const search = req.params.search;
+        const posts = await Post.find({ $text: { $search: search } });
         res.status(200).json(posts);
     } catch (error) {
         res.status(404).json(error);

@@ -54,9 +54,11 @@ const PostList = ({post}) => {
                 </div>
                 <div className="tags mt-5">
                     {post.tags.map((tag) => (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mr-2">
-                            {tag}
-                        </span>
+                        <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10
+                        hover:bg-blue-100 hover:text-blue-800 mr-2 cursor-pointer
+                        ">
+                        {tag}
+                      </span>
                     ))}
                 </div>
             </div>

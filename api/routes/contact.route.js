@@ -1,5 +1,6 @@
 import express from 'express';
-import { readContactInfo, sendContactInfo } from '../../controller/pagesController/contact.controller.js';
+import { sendContactInfo } from '../controller/public/contact.controller.js';
+import { readContactInfo } from '../controller/admin/contact.controller.js';
 
 const router = express.Router();
 

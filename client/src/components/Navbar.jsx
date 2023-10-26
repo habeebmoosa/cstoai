@@ -1,6 +1,8 @@
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { ListOfPostBySearch } from './ListOfPostBySearch'
 
 const navigation = [
   { name: 'Home', href: '/', current: false },
@@ -13,6 +15,12 @@ function classNames(...classes) {
 }
 
 export const Navbar = () => {
+  const navigate = useNavigate();
+
+  const [search, setSearch] = useState('');
+
+
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -31,15 +39,11 @@ export const Navbar = () => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+
+              <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
                 <div className="flex flex-shrink-0 items-center">
-                  {/* <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  /> */}
                   <Link to='/'>
-                    <h1 className ="text-white font-bold text-2xl">
+                    <h1 className="text-white font-bold text-2xl">
                       CStoAi
                     </h1>
                   </Link>
@@ -61,11 +65,27 @@ export const Navbar = () => {
                   </div>
                 </div>
               </div>
+              <div className="hidden sm:block pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-1">
+                <input type='serach' placeholder='Search' className='bg-gray-700 text-white px-4 py-2 rounded-md'
+                  onChange={
+                    (e) => setSearch(e.target.value)
+                  } value={search}
+                />
+                <button className='bg-blue-700 text-white px-4 py-2 rounded-md'
+                  onClick={
+                    (e) => {
+                      e.preventDefault();
+                      console.log(search);
+                      navigate('/search?search=' + search, { state: { search: search }});
+                    }
+                  }
+                >Search</button>
+              </div>
             </div>
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
+            <div className="space-y-2 px-2 pb-3 pt-2">
               {navigation.map((item) => (
                 <Link
 
@@ -79,6 +99,26 @@ export const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
+
+              <div className="border-b-2 border-gray-500  mb-12"></div>
+
+              <div className="pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-1 ">
+                <input type='serach' placeholder='Search' className='bg-gray-700 text-white px-4 py-2 rounded-md'
+                  onChange={
+                    (e) => setSearch(e.target.value)
+                  } value={search}
+                />
+                <button className='bg-blue-700 text-white px-4 py-2 rounded-md'
+                  onClick={
+                    (e) => {
+                      e.preventDefault();
+                      console.log(search);
+                      navigate('/search?search=' + search, { state: { search: search }});
+                      // <ListOfPostBySearch prompt={search} />
+                    }
+                  }
+                >Search</button>
+              </div>
             </div>
           </Disclosure.Panel>
         </>

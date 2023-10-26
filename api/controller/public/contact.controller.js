@@ -16,13 +16,3 @@ export const sendContactInfo = async (req, res) => {
         res.status(500).json({ error: "Something went wrong" });
     }
 }
-
-export const readContactInfo = async (req, res) => {
-    try {
-        const contactInfo = await Contact.find();
-        res.status(200).json(contactInfo);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: "Something went wrong" });
-    }
-}
