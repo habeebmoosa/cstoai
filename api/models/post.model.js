@@ -1,48 +1,51 @@
 import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema({
-    title:{
+    status: {
+        type: String,
+        enum: ['draft', 'public', 'private'],
+        default: 'draft'
+    },
+    title: {
         type: String,
         required: true,
         unique: true
     },
-    url:{
+    url: {
         type: String,
         required: true,
         unique: true
     },
-    description:{
+    description: {
         type: String,
         required: true,
     },
-    image:{
-        imgname: {
-            type: String,
-            required: false,
-            unique: true
-        },
-        imgpath:{
-            type: String,
-            required: false
-        }
+    imgname: {
+        type: String,
+        required: true,
+        unique: true
     },
-    content:{
+    imgpath: {
         type: String,
         required: true
     },
-    username:{
+    content: {
         type: String,
         required: true
     },
-    tags:{
+    username: {
+        type: String,
+        required: true
+    },
+    tags: {
         type: [String],
         required: false
     },
-    views:{
+    views: {
         type: Number,
         default: 0
     },
-    createdDate:{
+    createdDate: {
         type: Date,
         default: new Date()
     }

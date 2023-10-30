@@ -1,21 +1,30 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { Navbar } from "./components/Navbar";
-import { Footer } from './components/Footer';
-import { NotFound } from './pages/404';
-import { About } from './pages/About';
-import { Contact } from './pages/Contact';
-import { PostPage } from './pages/PostPage';
-import { ListOfPostByTag } from './components/ListOfPostByTag';
-import { AuthorInfoAndPosts } from './components/AuthorInfoAndPosts';
-import { BlogLayout } from './layouts/BlogLayout';
-import { ListOfPostBySearch } from './components/ListOfPostBySearch';
+import { Home } from './public/pages/Home';
+import { NotFound } from './public/pages/404';
+import { About } from './public/pages/About';
+import { Contact } from './public/pages/Contact';
+import { PostPage } from './public/pages/PostPage';
+import { ListOfPostByTag } from './public/components/ListOfPostByTag';
+import { AuthorInfoAndPosts } from './public/components/AuthorInfoAndPosts';
+import { BlogLayout } from './public/layouts/BlogLayout';
+import { ListOfPostBySearch } from './public/components/ListOfPostBySearch';
+import { DashboardLayout } from './admin/layouts/DashboardLayout';
+import { CreatePost } from './admin/pages/createPost';
+import { ListOfPosts } from './admin/pages/ListOfPosts';
+import { EditPost } from './admin/pages/EditPost';
+import { ContactFeedback } from './admin/pages/ContactFeedback';
+import { AuthLayout } from './admin/layouts/AuthLayout';
+import { Signup } from './admin/pages/auth/Signup';
+import { Signin } from './admin/pages/auth/Signin';
+import { AdminHome } from './admin/pages/AdminHome';
+import { ListOfUsers } from './admin/pages/ListOfUsers';
 
 export default function App() {
   return (
     <div>
       <Routes>
+
         <Route path="/" element={<BlogLayout />}>
           <Route index element={<Home />} />
           <Route path=':url' element={<PostPage />} />
@@ -25,24 +34,29 @@ export default function App() {
           <Route path='tags/:tag' element={<ListOfPostByTag />} />
           <Route path='search' element={<ListOfPostBySearch />} />
         </Route>
-        <Route path='/admin' element={<h1>admin dashboard</h1>}>
-          <Route path='auth'>
-            <Route path='signup' element={<h1>signup</h1>} />
-            <Route path='signin' element={<h1>signin</h1>} />
+
+        <Route path='/admin'>
+
+          <Route index element={<AdminHome/>} />
+
+          <Route path='auth' element={<AuthLayout/>}>
+            <Route path='signup' element={<Signup/>} />
+            <Route path='signin' element={<Signin/>} />
             <Route path='forgotpassword' element={<h1>forgotpassword</h1>} />
             <Route path='resetpassword' element={<h1>resetpassword</h1>} />
           </Route>
-          <Route path='dashboard'>
-            <Route path='posts' element={<h1>posts</h1>} >
-              <Route path='create' element={<h1>create</h1>} />
-              <Route path='edit/:id' element={<h1>edit</h1>} />
+
+          <Route path='dashboard' element={<DashboardLayout/>}>
+            <Route path='posts'>
+              <Route index element={<ListOfPosts/>} />
+              <Route path='create' element={<CreatePost/>} />
+              <Route path='edit/:url' element={<EditPost/>} />
             </Route>
-            <Route path='contacts' element={<h1>contacts</h1>} />
-            <Route path='comments' element={<h1>comments</h1>} />
-            <Route path='users' element={<h1>users</h1>} />
-            <Route path='tags' element={<h1>tags</h1>} />
+            <Route path='contacts' element={<ContactFeedback/>} />
+            <Route path='users' element={<ListOfUsers/>} />
             <Route path='settings' element={<h1>settings</h1>} />
           </Route>
+
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

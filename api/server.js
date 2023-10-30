@@ -5,6 +5,7 @@ import { postRoutes } from './routes/post.route.js';
 import cors from 'cors';
 import { contactRoutes } from './routes/contact.route.js';
 import { authorRoutes } from './routes/author.route.js';
+import { authRoutes } from './routes/auth.route.js';
 
 const app = express();
 dotenv.config();
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.static('public'))
 
 // Routes
+app.use('/auth', authRoutes);
 app.use('/post', postRoutes);
 app.use('/pages/contact', contactRoutes);
 app.use('/author', authorRoutes);

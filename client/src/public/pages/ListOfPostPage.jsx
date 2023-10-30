@@ -5,7 +5,7 @@ export const ListOfPostPage = ({ posts, heading, description }) => {
     return (
         <div className="bg-white py-24 sm:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <PostListHeader heading={heading} description={description}/>
+                <PostListHeader heading={heading} description={description} />
                 <div className="mx-auto mt-10 grid grid-cols-1 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16">
                     {posts.map((post) => (
                         <PostList post={post} />
@@ -16,19 +16,18 @@ export const ListOfPostPage = ({ posts, heading, description }) => {
     )
 }
 
-const PostList = ({post}) => {
+const PostList = ({ post }) => {
     return (
         <div className="flex flex-col lg:flex-row lg:space-5">
             <div className="max-w-md mx-auto lg:mx-0">
-                <Link to={"/"+post.url}>
-                    {/* <img src={`${import.meta.env.VITE_NOTFOUND_IMAGE}`} alt={post.title} className="w-full h-auto rounded-lg" /> */}
+                <Link to={"/" + post.url}>
                     <div>
-                {post.image ? (
-                    <img src={`${import.meta.env.VITE_API_BASE_URL}/images/${post.image.imgname}`} alt={post.title} className="w-full h-auto rounded-lg" />
-                ) : (
-                    <img src={`${import.meta.env.VITE_NOTFOUND_IMAGE}`} alt={post.title} className="w-full h-auto rounded-lg" />
-                )}
-            </div>
+                        {post.imgname ? (
+                            <img src={`${import.meta.env.VITE_API_BASE_URL}/images/${post.imgname}`} alt={post.title} className="w-full h-auto rounded-lg" />
+                        ) : (
+                            <img src={`${import.meta.env.VITE_NOTFOUND_IMAGE}`} alt={post.title} className="w-full h-auto rounded-lg" />
+                        )}
+                    </div>
                 </Link>
             </div>
             <div className="mt-5 lg:mt-0 lg:ml-10 max-w-md">
@@ -40,14 +39,14 @@ const PostList = ({post}) => {
                     })
                 }</time>
                 <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                    <Link to={"/"+post.url}>
+                    <Link to={"/" + post.url}>
                         {post.title}
                     </Link>
                 </h3>
                 <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{post.description}</p>
                 <div className="mt-5 text-sm leading-6">
                     <p className="font-semibold text-gray-900">
-                        <Link to={"/author/"+post.author}>
+                        <Link to={"/author/" + post.author}>
                             {post.author}
                         </Link>
                     </p>
@@ -57,8 +56,8 @@ const PostList = ({post}) => {
                         <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10
                         hover:bg-blue-100 hover:text-blue-800 mr-2 cursor-pointer
                         ">
-                        {tag}
-                      </span>
+                            {tag}
+                        </span>
                     ))}
                 </div>
             </div>

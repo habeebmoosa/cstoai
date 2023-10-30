@@ -66,6 +66,17 @@ export const Navbar = () => {
                 </div>
               </div>
               <div className="hidden sm:block pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-1">
+                {
+                  localStorage.getItem("token") ? (
+                    <button className="bg-gray-800 hover:bg-gray-600 transition duration-300 ease-in-out text-white py-2 px-4 rounded-md"
+                      onClick={() => {
+                        navigate('/admin/dashboard');
+                      }}
+                    >Dashboard</button>
+                  ) : (
+                    <></>
+                  )
+                }
                 <input type='serach' placeholder='Search' className='bg-gray-700 text-white px-4 py-2 rounded-md'
                   onChange={
                     (e) => setSearch(e.target.value)
@@ -76,7 +87,7 @@ export const Navbar = () => {
                     (e) => {
                       e.preventDefault();
                       console.log(search);
-                      navigate('/search?search=' + search, { state: { search: search }});
+                      navigate('/search?search=' + search, { state: { search: search } });
                     }
                   }
                 >Search</button>
@@ -100,6 +111,18 @@ export const Navbar = () => {
                 </Link>
               ))}
 
+              {
+                localStorage.getItem("token") ? (
+                  <button className="bg-gray-800 hover:bg-gray-600 transition duration-300 ease-in-out text-white py-2 px-4 rounded-md"
+                    onClick={() => {
+                      navigate('/admin/dashboard');
+                    }}
+                  >Dashboard</button>
+                ) : (
+                  <></>
+                )
+              }
+
               <div className="border-b-2 border-gray-500  mb-12"></div>
 
               <div className="pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-1 ">
@@ -113,8 +136,7 @@ export const Navbar = () => {
                     (e) => {
                       e.preventDefault();
                       console.log(search);
-                      navigate('/search?search=' + search, { state: { search: search }});
-                      // <ListOfPostBySearch prompt={search} />
+                      navigate('/search?search=' + search, { state: { search: search } });
                     }
                   }
                 >Search</button>

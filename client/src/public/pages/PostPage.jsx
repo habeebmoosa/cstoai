@@ -7,7 +7,6 @@ export const PostPage = () => {
     const { url } = useParams();
     const [post, setPost] = useState({});
     const [author, setAuthor] = useState({});
-    const [image, setImage] = useState("");
 
     useEffect(() => {
         const getPost = async () => {
@@ -32,8 +31,8 @@ export const PostPage = () => {
             <p className="text-gray-500 mt-2">{post.description}</p>
 
             <div>
-                {post.image ? (
-                    <img src={`${import.meta.env.VITE_API_BASE_URL}/images/${post.image.imgname}`} alt={post.title} className="my-8 rounded-md" />
+                {post.imgname ? (
+                    <img src={`${import.meta.env.VITE_API_BASE_URL}/images/${post.imgname}`} alt={post.title} className="my-8 rounded-md" />
                 ) : (
                     <img src={`${import.meta.env.VITE_NOTFOUND_IMAGE}`} alt={post.title} className="my-8 rounded-md" />
                 )}
