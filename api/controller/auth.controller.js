@@ -47,3 +47,23 @@ export const signin = async (req, res) => {
         res.status(404).json(error);
     }
 };
+
+export const resetPassword = async (req, res) => {
+    const id = req.userId;
+    try {
+        const { password, newPassword } = req.body;
+
+        const user = await Author.findOne({ _id: id });
+        if(!user) return res.status(404).json({ message: "User doesn't exist" });
+
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        if(!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
+
+        const hashedPassword = await bcrypt.hash(newPassword, 12);
+        await Author.findByIdAndUpdate(id, { password: hashedPassword }, { new: true });
+
+        res.status(200).json({ message: "Password updated" });
+    } catch (error) {
+        res.status(404).json(error);
+    }
+}

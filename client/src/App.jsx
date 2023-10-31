@@ -19,6 +19,8 @@ import { Signup } from './admin/pages/auth/Signup';
 import { Signin } from './admin/pages/auth/Signin';
 import { AdminHome } from './admin/pages/AdminHome';
 import { ListOfUsers } from './admin/pages/ListOfUsers';
+import { Settings } from './admin/pages/Settings';
+import { ResetPaaaword } from './admin/pages/auth/ResetPassword';
 
 export default function App() {
   return (
@@ -43,7 +45,7 @@ export default function App() {
             <Route path='signup' element={<Signup/>} />
             <Route path='signin' element={<Signin/>} />
             <Route path='forgotpassword' element={<h1>forgotpassword</h1>} />
-            <Route path='resetpassword' element={<h1>resetpassword</h1>} />
+            <Route path='resetpassword' element={<ResetPaaaword/>} />
           </Route>
 
           <Route path='dashboard' element={<DashboardLayout/>}>
@@ -54,7 +56,7 @@ export default function App() {
             </Route>
             <Route path='contacts' element={<ContactFeedback/>} />
             <Route path='users' element={<ListOfUsers/>} />
-            <Route path='settings' element={<h1>settings</h1>} />
+            <Route path='settings' element={<Settings/>} />
           </Route>
 
         </Route>

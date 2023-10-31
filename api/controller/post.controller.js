@@ -116,7 +116,11 @@ export const updatePost = async (req, res) => {
     try {
         const { status, title, description, imgname, imgpath, content, tags } = req.body;
         const tagsLowercase = tags.map(tag => tag.toLowerCase());
-        const post = await Post.findOneAndUpdate({ url: req.params.url }, { status, title, description, imgname, imgpath, content, tags: tagsLowercase }, { new: true });
+        
+        const post = await Post.findOneAndUpdate({ url: req.params.url,
+            username
+         }, { status, title, description, imgname, imgpath, content, tags: tagsLowercase }, { new: true });
+
         res.status(200).json(post);
     } catch (error) {
         res.status(404).json(error);

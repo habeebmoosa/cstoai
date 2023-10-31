@@ -11,7 +11,7 @@ export const AuthorInfoAndPosts = ()=>{
 
     const fetchData = async () => {
         try {
-            const response = await Axios.get(`${import.meta.env.VITE_API_BASE_URL}/author/${username}`);
+            const response = await Axios.get(`${import.meta.env.VITE_API_BASE_URL}/author/user/${username}`);
             setAuthor(response.data.author);
             setPosts(response.data.posts.reverse());
         } catch (error) {

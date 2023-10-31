@@ -12,8 +12,14 @@ const authorSchema = new mongoose.Schema({
         required: true,
     },
     profilePicture:{
-        type: String,
-        required: false,
+        name:{
+            type: String,
+            required: false,
+        },
+        path:{
+            type: String,
+            required: false,
+        }
     },
     description:{
         type: String,
@@ -22,7 +28,8 @@ const authorSchema = new mongoose.Schema({
     username:{
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        update: false,
     },
     email:{
         type: String,
@@ -38,6 +45,32 @@ const authorSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'posts',
     }],
+    social:{
+        facebook:{
+            type: String,
+            required: false,
+        },
+        twitter:{
+            type: String,
+            required: false,
+        },
+        instagram:{
+            type: String,
+            required: false,
+        },
+        linkedin:{
+            type: String,
+            required: false,
+        },
+        github:{
+            type: String,
+            required: false,
+        },
+        youtube:{
+            type: String,
+            required: false,
+        },
+    }
 });
 
 export const Author = mongoose.model('authors', authorSchema);

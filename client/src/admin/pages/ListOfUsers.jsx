@@ -9,6 +9,7 @@ function classNames(...classes) {
 
 export const ListOfUsers = () => {
     const [users, setUsers] = useState([]);
+    const [isOwner, setIsOwner] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,11 +19,47 @@ export const ListOfUsers = () => {
                 },
             });
 
+            if(response.data.position === 'Author'){
+                setIsOwner(false);
+            }
+            
             setUsers(response.data);
             console.log(users);
         }
         fetchData();
-    }, [])
+    }, []);
+
+
+    const deleteUser = async (username)=>{
+        try {
+            const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/author/delete/${username}`, {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                },
+            });
+            console.log(response);
+            alert("User Deleted Successfully!");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const changePosition = async (username, position)=>{
+        try {
+            const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/author/position/${username}`,{
+                position: position
+            }, {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                },
+            });
+            
+            console.log(response);
+            alert("User Position Changed Successfully!");
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <div className="flex flex-col item-center justify-center lg:ml-64 lg:mt-6 lg:w-full">
@@ -35,10 +72,12 @@ export const ListOfUsers = () => {
                 </p>
                 <div className="border-b-2 border-gray-200 m-8"></div>
             </div>
-            <div className="flex flex-col p-4 gap-4">
+            {
+                isOwner ? (
+                    <div className="flex flex-col p-4 gap-4">
                 {users.map((user) => {
                     return (
-                        <div className="flex md:flex-row flex-col p-4 justify-between">
+                        <div className="flex md:flex-row flex-col p-4 justify-between" key={user.username}>
                             <div className="flex md:flex-row flex-col gap-5 items-center">
                                 <div className="flex items-center">
                                     <img src={`${import.meta.env.VITE_API_BASE_URL}/images/profile.png`} alt={user.title} className=" w-28 h-auto rounded-full" />
@@ -85,8 +124,7 @@ export const ListOfUsers = () => {
                                                         <button
                                                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 w-full text-left')}
                                                             onClick={() => {
-                                                                // setOpen(true)
-                                                                // confirm("Are you sure you want to delete this post?") && deletePost(post.url)
+                                                                confirm("Are you sure you want to delete this User?") && deleteUser(user.username);
                                                             }}
                                                         >
                                                             Delete User
@@ -98,8 +136,17 @@ export const ListOfUsers = () => {
                                                 {({ active }) => (
                                                     <button
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 w-full text-left')}
+                                                        onClick={()=>{
+                                                            confirm("Are you sure you want to change the position of this User?") && changePosition(user.username, user.position === 'author' ? 'owner' : 'author');
+                                                        }}
                                                     >
-                                                        Change Position
+                                                        {
+                                                            user.position === 'author' ? (
+                                                                    "Make Owner"
+                                                            ) : (
+                                                                    "Make Author"
+                                                            )
+                                                        }
                                                     </button>
                                                 )}
                                             </Menu.Item>
@@ -112,6 +159,12 @@ export const ListOfUsers = () => {
                     )
                 })}
             </div>
+                ): (
+                    <div className=" flex items-center justify-center">
+                        <p>You are not owner to view the members of the blog!</p>
+                    </div>
+                )
+            }
         </div>
     )
 }
