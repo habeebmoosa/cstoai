@@ -13,10 +13,11 @@ export const readPosts = async (req, res) => {
             title: {
                 $regex: query.search,
                 $options: 'i'
-            }
+            },
+            status: 'public'
         };
 
-        const posts = await Post.find(query.search ? searchFilter : null);
+        const posts = await Post.find(query.search ? searchFilter : { status: 'public' });
         res.status(200).json(posts);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -25,7 +26,7 @@ export const readPosts = async (req, res) => {
 
 export const readPost = async (req, res) => {
     try {
-        const post = await Post.findOne({ url: req.params.url });
+        const post = await Post.findOne({ url: req.params.url, status: 'public' });
         post.views += 1;
         await post.save();
 
@@ -38,7 +39,7 @@ export const readPost = async (req, res) => {
 
 export const readPostsByTag = async (req, res) => {
     try {
-        const posts = await Post.find({ tags: req.params.tag });
+        const posts = await Post.find({ tags: req.params.tag, status: 'public' });
         res.status(200).json(posts);
     } catch (error) {
         res.status(404).json(error);
@@ -95,11 +96,11 @@ export const uploadImage = async (req, res) => {
 
 export const createPost = async (req, res) => {
     try {
-        const { title, description, imgname, imgpath, content, tags } = req.body;
+        const { status, title, description, imgname, imgpath, content, tags } = req.body;
         const username = req.username;
         const url = title.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/\s+/g, '-');
         const tagsLowercase = tags.map(tag => tag.toLowerCase());
-        const newPost = new Post({ title, url, description, imgname, imgpath, content, username, tags: tagsLowercase });
+        const newPost = new Post({ status, title, url, description, imgname, imgpath, content, username, tags: tagsLowercase });
         await newPost.save();
 
         res.status(201).json({
@@ -143,5 +144,15 @@ export const readPostsByUser = async (req, res) => {
         res.status(200).json(posts);
     } catch (error) {
         res.status(500).json(error)
+    }
+}
+
+export const readPostByAdmin = async (req, res) => {
+    const username = req.username;
+    try {
+        const post = await Post.findOne({ url: req.params.url, username });
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(404).json(error);
     }
 }

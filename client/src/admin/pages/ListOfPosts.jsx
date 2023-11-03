@@ -49,6 +49,22 @@ export const ListOfPosts = () => {
         }
     }
 
+    const changeStatus = async (status, url) => {
+        try {
+            const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/post/update/${url}`, {
+                status: status
+            }, {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                },
+            });
+            console.log(response.data);
+            fetchData();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className="flex flex-col item-center justify-center lg:ml-64 lg:mt-6 lg:w-full">
             <div className="heading text-3xl font-bold text-center select-none">
@@ -147,8 +163,11 @@ export const ListOfPosts = () => {
                                                 {({ active }) => (
                                                     <button
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 w-full text-left')}
+                                                        onClick={() => {
+                                                            confirm("Are you sure you want to change the status of this post?") && changeStatus(post.status === "public" ? "private" : "public", post.url)
+                                                        }}
                                                     >
-                                                        Unpulish
+                                                        {post.status === "public" ? "Make Private" : "Make Public"}
                                                     </button>
                                                 )}
                                             </Menu.Item>

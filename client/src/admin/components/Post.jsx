@@ -114,7 +114,7 @@ export const Post = ({
                     <button type="submit" className="
                         bg-gray-800 hover:bg-gray-600 transition duration-300 ease-in-out py-2 px-4 rounded-md text-center text-white"
                         onClick={() => {
-                            triggerPost();
+                            triggerPost("public");
                         }}
                     >{btn}</button>
                     <button className="
@@ -130,6 +130,11 @@ export const Post = ({
                             setTag("");
                         }}
                     >Reset</button>
+                    <button className="bg-gray-800 hover:bg-gray-600 transition duration-300 ease-in-out py-2 px-4 rounded-md text-center text-white"
+                        onClick={() => {
+                            triggerPost("draft");
+                        }}
+                    >Draft</button>
                     <button className="
                         bg-gray-800 hover:bg-gray-600 transition duration-300 ease-in-out py-2 px-4 rounded-md text-center text-white"
                         onClick={() => {

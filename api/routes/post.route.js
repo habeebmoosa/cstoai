@@ -1,5 +1,5 @@
 import express from 'express';
-import { createPost, deletePost, readPost, readPosts, readPostsBySearch, readPostsByTag, readPostsByUser, updatePost, uploadImage } from '../controller/post.controller.js';
+import { createPost, deletePost, readPost, readPostByAdmin, readPosts, readPostsBySearch, readPostsByTag, readPostsByUser, updatePost, uploadImage } from '../controller/post.controller.js';
 import { verifyAuth } from '../middlewares/verifyAuth.js';
 
 const router = express.Router();
@@ -16,6 +16,7 @@ router.put('/update/:url',verifyAuth, updatePost);
 router.delete('/delete/:url',verifyAuth, deletePost);
 router.post('/uploadimage', verifyAuth, uploadImage);
 router.get('/readbyuser', verifyAuth, readPostsByUser);
+router.get('/readbyadmin/:url', verifyAuth, readPostByAdmin);
 
 
 export { router as postRoutes }

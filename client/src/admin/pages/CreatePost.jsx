@@ -20,7 +20,7 @@ export const CreatePost = () => {
     const [description, setDescription] = useState("");
     const [content, setContent] = useState("");
 
-    const triggerPost = async () => {
+    const triggerPost = async (status) => {
         try {
 
             const formData = new FormData();
@@ -41,6 +41,7 @@ export const CreatePost = () => {
 
 
             await Axios.post(`${import.meta.env.VITE_API_BASE_URL}/post/create`, {
+                status: status,
                 title,
                 description,
                 imgname: res.data.imgname,
@@ -80,7 +81,7 @@ export const CreatePost = () => {
                 setTags={setTags}
                 setTag={setTag}
                 triggerPost={triggerPost}
-                btn={"Create Post"}
+                btn={"Publish"}
             />
         </div>
     );

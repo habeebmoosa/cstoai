@@ -1,7 +1,7 @@
-import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Post } from "../components/Post";
+import axios from "axios";
 
 export const EditPost = () => {
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ export const EditPost = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await Axios.get(`${import.meta.env.VITE_API_BASE_URL}/post/getpost/${url}`, {
+                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/post/readbyadmin/${url}`, {
                     headers: {
                         Authorization: `${localStorage.getItem("token")}`,
                     },
@@ -34,11 +34,11 @@ export const EditPost = () => {
                 console.log(post);
                 console.log(response.data);
 
-                setTitle(response.data.post.title);
-                setDescription(response.data.post.description);
-                setContent(response.data.post.content);
-                setTags(response.data.post.tags);
-                setImageUrl(`${import.meta.env.VITE_API_BASE_URL}/images/${response.data.post.imgname}`);
+                setTitle(response.data.title);
+                setDescription(response.data.description);
+                setContent(response.data.content);
+                setTags(response.data.tags);
+                setImageUrl(`${import.meta.env.VITE_API_BASE_URL}/images/${response.data.imgname}`);
 
             } catch (error) {
                 console.log(error);
@@ -47,9 +47,10 @@ export const EditPost = () => {
         fetchData();
     }, [])
 
-    const triggerPost = async () => {
+    const triggerPost = async (status) => {
         try {
-            await Axios.put(`${import.meta.env.VITE_API_BASE_URL}/post/update/${url}`, {
+            await axios.put(`${import.meta.env.VITE_API_BASE_URL}/post/update/${url}`, {
+                status,
                 title,
                 description,
                 content,

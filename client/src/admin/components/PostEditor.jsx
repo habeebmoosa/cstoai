@@ -25,7 +25,7 @@ export const PostEditor = ({value,onChange}) => {
         <div className="content">
         <ReactQuill
           value={value}
-          theme={'snow'}
+          theme='snow'
           onChange={onChange}
           modules={modules}
           style={editorStyles}

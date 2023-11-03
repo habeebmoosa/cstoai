@@ -14,7 +14,7 @@ export const ResetPaaaword = ()=>{
                     newPassword
                 },{
                     headers:{
-                        authorization: `Bearer ${localStorage.getItem("token")}`
+                        authorization: `${localStorage.getItem("token")}`
                     }
                 });
     

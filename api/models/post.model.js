@@ -4,7 +4,8 @@ const postSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: ['draft', 'public', 'private'],
-        default: 'draft'
+        default: 'draft',
+        required: true
     },
     title: {
         type: String,
