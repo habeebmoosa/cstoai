@@ -13,7 +13,12 @@ export const PostPage = () => {
             try {
                 const response = await Axios.get(`${import.meta.env.VITE_API_BASE_URL}/post/getpost/${url}`);
                 setPost(response.data.post);
-                setAuthor(response.data.author);
+
+                if (!response.data.author) {
+                    setAuthor({ name: "Unknown", username: "Unknown" })
+                } else {
+                    setAuthor(response.data.author);
+                }
                 console.log(response.data);
 
             } catch (error) {
@@ -42,9 +47,13 @@ export const PostPage = () => {
             <div className="flex flex-row justify-between mb-8">
 
                 <p className="text-gray-500 mt-2">By{" "}
-                    <Link to={"/author/" + author.username} className='hover:text-gray-700'>
-                        {author.name}
-                    </Link>
+                    {author.username === "Unknown" ? (
+                        <span className="text-gray-500 mt-2">Unknown</span>
+                    ) : (
+                        <Link to={"/author/" + author.username} className='hover:text-gray-700'>
+                            {author.name}
+                        </Link>
+                    )}
                 </p>
 
                 <p className="text-gray-500 mt-2">

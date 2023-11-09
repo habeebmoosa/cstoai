@@ -51,6 +51,7 @@ export const ListOfPosts = () => {
 
     const changeStatus = async (status, url) => {
         try {
+            console.log(url+ " "+ status);
             const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/post/update/${url}`, {
                 status: status
             }, {
@@ -58,6 +59,7 @@ export const ListOfPosts = () => {
                     Authorization: `${localStorage.getItem("token")}`,
                 },
             });
+            
             console.log(response.data);
             fetchData();
         } catch (error) {
