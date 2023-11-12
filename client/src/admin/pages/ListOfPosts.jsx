@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
-import { DialogConfirm } from "../components/DialogConfirm";
 import axios from "axios";
 
 function classNames(...classes) {
@@ -11,16 +10,15 @@ function classNames(...classes) {
 export const ListOfPosts = () => {
     const navigate = useNavigate();
 
-    if(!localStorage.getItem("token")){
+    if (!localStorage.getItem("token")) {
         navigate('/admin/auth/signin');
     }
 
     const [posts, setPosts] = useState([]);
-    const [open, setOpen] = useState(false);
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/post/readbyuser`,{
+            const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/post/readbyuser`, {
                 headers: {
                     Authorization: `${localStorage.getItem("token")}`,
                 },
@@ -38,7 +36,7 @@ export const ListOfPosts = () => {
 
     const deletePost = async (url) => {
         try {
-            await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/post/delete/${url}`,{
+            await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/post/delete/${url}`, {
                 headers: {
                     Authorization: `${localStorage.getItem("token")}`,
                 },
@@ -51,7 +49,7 @@ export const ListOfPosts = () => {
 
     const changeStatus = async (status, url) => {
         try {
-            console.log(url+ " "+ status);
+            console.log(url + " " + status);
             const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/post/update/${url}`, {
                 status: status
             }, {
@@ -59,7 +57,7 @@ export const ListOfPosts = () => {
                     Authorization: `${localStorage.getItem("token")}`,
                 },
             });
-            
+
             console.log(response.data);
             fetchData();
         } catch (error) {
@@ -138,27 +136,15 @@ export const ListOfPosts = () => {
                                             </Menu.Item>
                                             <Menu.Item>
                                                 {({ active }) => (
-                                                    <>
+                                                    
                                                         <button
                                                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 w-full text-left')}
                                                             onClick={() => {
-                                                                // setOpen(true)
                                                                 confirm("Are you sure you want to delete this post?") && deletePost(post.url)
                                                             }}
                                                         >
                                                             Delete
                                                         </button>
-                                                        {/* <DialogConfirm
-                                                            title={"Delete Post"}
-                                                            description={"Are you sure you want to delete this post?"}
-                                                            btn1={"Delete"}
-                                                            btn2={"Cancel"}
-                                                            action1={deletePost(post.url)}
-                                                            action2={() => { }}
-                                                            open={open}
-                                                            setOpen={setOpen}
-                                                        /> */}
-                                                    </>
                                                 )}
                                             </Menu.Item>
                                             <Menu.Item>

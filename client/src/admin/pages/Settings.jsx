@@ -57,6 +57,22 @@ export const Settings = () => {
         }
     }
 
+    const deleteAccount = async () => {
+        try {
+            console.log(author.username);
+            const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/author/delete/${author.username}`, {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                },
+            });
+            console.log(response.data);
+            localStorage.removeItem("token");
+            navigate('/admin/auth/signin');
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div className="flex flex-col item-center justify-center lg:ml-64 lg:mt-6 lg:w-full mb-7">
             <div className="heading text-3xl font-bold text-center select-none mb-5">
@@ -158,7 +174,9 @@ export const Settings = () => {
                     <h1 className="text-2xl font-bold mb-5">Danger Zone</h1>
                     <p className="text-red-700">Once you delete your account, there is no going back. Please be certain.</p>
                     <button className="bg-red-700 text-white p-2 rounded-md w-60 self-center"
-                        onClick={()=> console.log(author)}
+                        onClick={()=> {
+                            confirm("Are you sure you want to delete your account?") && deleteAccount();
+                        }}
                     >Delete Account</button>
                 </div>
             </div>

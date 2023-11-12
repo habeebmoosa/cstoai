@@ -1,11 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const ListOfPostPage = ({ posts, heading, description }) => {
+export const ListOfPostPage = ({ posts, heading, description, author }) => {
+    console.log(author)
     return (
         <div className="bg-white py-24 sm:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <PostListHeader heading={heading} description={description} />
+                {
+                    author ? (
+                        <div className="flex flex-col lg:flex-row lg:space-5">
+                            <div className="max-w-md mx-auto lg:mx-0">
+                                <div>
+                                    {author.imgname ? (
+                                        <img src={`${import.meta.env.VITE_API_BASE_URL}/images/${author.imgname}`} alt={author.name} className="w-28 h-auto rounded-full" />
+                                    ) : (
+                                        <img src={`${import.meta.env.VITE_NOTFOUND_IMAGE}`} alt={author.name} className="w-28 h-auto rounded-full" />
+                                    )}
+                                </div>
+                            </div>
+                            {/* <div className="mt-5 lg:mt-0 lg:ml-10 max-w-md">
+                                <div className="flex items-center gap-2">
+                                    {author.social.map((link) => (
+                                        <Link to={link.link} target="_blank" rel="noreferrer">
+                                            {link}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div> */}
+                        </div>
+                    ) : (
+                        <></>
+                    )
+                }
                 <div className="mx-auto mt-10 grid grid-cols-1 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16">
                     {posts.map((post) => (
                         <PostList post={post} />

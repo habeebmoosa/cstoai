@@ -27,9 +27,10 @@ export const getAuthor = async (req, res) => {
 // private controller ----------------------------------------------------------------------
 
 export const deleteAuthor = async (req, res) => {
-    const id = req.id;
+    const id = req.userId;
     const position = req.position;
     const username = req.params.username;
+    console.log(id, position, username);
 
     try {
         const author = await Author.findOne({ username });

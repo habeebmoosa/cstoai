@@ -11,21 +11,22 @@ export const ListOfUsers = () => {
     const [users, setUsers] = useState([]);
     const [isOwner, setIsOwner] = useState(true);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/author/get`, {
-                headers: {
-                    Authorization: `${localStorage.getItem("token")}`,
-                },
-            });
+    const fetchData = async () => {
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/author/get`, {
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`,
+            },
+        });
 
-            if(response.data.position === 'Author'){
-                setIsOwner(false);
-            }
-            
-            setUsers(response.data);
-            console.log(users);
+        if(response.data.position === 'Author'){
+            setIsOwner(false);
         }
+        
+        setUsers(response.data);
+        console.log(users);
+    };
+
+    useEffect(() => {
         fetchData();
     }, []);
 
@@ -37,6 +38,7 @@ export const ListOfUsers = () => {
                     Authorization: `${localStorage.getItem("token")}`,
                 },
             });
+            fetchData();
             console.log(response);
             alert("User Deleted Successfully!");
         } catch (error) {
@@ -53,7 +55,7 @@ export const ListOfUsers = () => {
                     Authorization: `${localStorage.getItem("token")}`,
                 },
             });
-            
+            fetchData();
             console.log(response);
             alert("User Position Changed Successfully!");
         } catch (error) {

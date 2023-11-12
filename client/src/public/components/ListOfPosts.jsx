@@ -8,7 +8,6 @@ export const ListOfPosts = () => {
 
     const fetchData = async () => {
         try {
-            // const response = await Axios.get("http://localhost:3001/post/read");
             const response = await Axios.get(`${import.meta.env.VITE_API_BASE_URL}/post/read`);
             setPosts(response.data.reverse());
         } catch (error) {

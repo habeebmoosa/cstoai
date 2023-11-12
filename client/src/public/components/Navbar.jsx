@@ -1,6 +1,6 @@
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ListOfPostBySearch } from './ListOfPostBySearch'
 
@@ -19,7 +19,11 @@ export const Navbar = () => {
 
   const [search, setSearch] = useState('');
 
-
+  useEffect(()=> {
+    if(window.location.pathname === '/'){
+      setSearch('');
+    }
+  }, []);
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -87,7 +91,9 @@ export const Navbar = () => {
                     (e) => {
                       e.preventDefault();
                       console.log(search);
-                      navigate('/search?search=' + search, { state: { search: search } });
+                      if(search.length > 0){
+                        navigate('/search?search=' + search, { state: { search: search } });
+                      }
                     }
                   }
                 >Search</button>
@@ -136,7 +142,9 @@ export const Navbar = () => {
                     (e) => {
                       e.preventDefault();
                       console.log(search);
-                      navigate('/search?search=' + search, { state: { search: search } });
+                      if(search.length > 0){
+                        navigate('/search?search=' + search, { state: { search: search } });
+                      }
                     }
                   }
                 >Search</button>
