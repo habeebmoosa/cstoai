@@ -35,29 +35,29 @@ export default function App() {
           <Route path='tags/:tag' element={<ListOfPostByTag />} />
           <Route path='search' element={<ListOfPostBySearch />} />
 
-          <Route path='admin'>
+        </Route>
 
-            <Route index element={<AdminHome />} />
+        <Route path='admin'>
+          <Route index element={<AdminHome />} />
 
-            <Route path='auth' element={<AuthLayout />}>
-              <Route path='signup' element={<Signup />} />
-              <Route path='signin' element={<Signin />} />
-              <Route path='forgotpassword' element={<h1>forgotpassword</h1>} />
-              <Route path='resetpassword' element={<ResetPaaaword />} />
-            </Route>
-
-            <Route path='dashboard' element={<DashboardLayout />}>
-              <Route path='posts'>
-                <Route index element={<ListOfPosts />} />
-                <Route path='create' element={<CreatePost />} />
-                <Route path='edit/:url' element={<EditPost />} />
-              </Route>
-              <Route path='contacts' element={<ContactFeedback />} />
-              <Route path='users' element={<ListOfUsers />} />
-              <Route path='settings' element={<Settings />} />
-            </Route>
-
+          <Route path='auth' element={<AuthLayout />}>
+            <Route path='signup' element={<Signup />} />
+            <Route path='signin' element={<Signin />} />
+            <Route path='forgotpassword' element={<h1>forgotpassword</h1>} />
+            <Route path='resetpassword' element={<ResetPaaaword />} />
           </Route>
+
+          <Route path='dashboard' element={<DashboardLayout />}>
+            <Route path='posts'>
+              <Route index element={<ListOfPosts />} />
+              <Route path='create' element={<CreatePost />} />
+              <Route path='edit/:url' element={<EditPost />} />
+            </Route>
+            <Route path='contacts' element={<ContactFeedback />} />
+            <Route path='users' element={<ListOfUsers />} />
+            <Route path='settings' element={<Settings />} />
+          </Route>
+
         </Route>
 
         <Route path="*" element={<NotFound />} />
