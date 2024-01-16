@@ -26,7 +26,6 @@ export default function App() {
   return (
     <div>
       <Routes>
-
         <Route path="/" element={<BlogLayout />}>
           <Route index element={<Home />} />
           <Route path=':url' element={<PostPage />} />
@@ -35,31 +34,32 @@ export default function App() {
           <Route path='author/:username' element={<AuthorInfoAndPosts />} />
           <Route path='tags/:tag' element={<ListOfPostByTag />} />
           <Route path='search' element={<ListOfPostBySearch />} />
-        </Route>
 
-        <Route path='/admin'>
+          <Route path='admin'>
 
-          <Route index element={<AdminHome/>} />
+            <Route index element={<AdminHome />} />
 
-          <Route path='auth' element={<AuthLayout/>}>
-            <Route path='signup' element={<Signup/>} />
-            <Route path='signin' element={<Signin/>} />
-            <Route path='forgotpassword' element={<h1>forgotpassword</h1>} />
-            <Route path='resetpassword' element={<ResetPaaaword/>} />
-          </Route>
-
-          <Route path='dashboard' element={<DashboardLayout/>}>
-            <Route path='posts'>
-              <Route index element={<ListOfPosts/>} />
-              <Route path='create' element={<CreatePost/>} />
-              <Route path='edit/:url' element={<EditPost/>} />
+            <Route path='auth' element={<AuthLayout />}>
+              <Route path='signup' element={<Signup />} />
+              <Route path='signin' element={<Signin />} />
+              <Route path='forgotpassword' element={<h1>forgotpassword</h1>} />
+              <Route path='resetpassword' element={<ResetPaaaword />} />
             </Route>
-            <Route path='contacts' element={<ContactFeedback/>} />
-            <Route path='users' element={<ListOfUsers/>} />
-            <Route path='settings' element={<Settings/>} />
-          </Route>
 
+            <Route path='dashboard' element={<DashboardLayout />}>
+              <Route path='posts'>
+                <Route index element={<ListOfPosts />} />
+                <Route path='create' element={<CreatePost />} />
+                <Route path='edit/:url' element={<EditPost />} />
+              </Route>
+              <Route path='contacts' element={<ContactFeedback />} />
+              <Route path='users' element={<ListOfUsers />} />
+              <Route path='settings' element={<Settings />} />
+            </Route>
+
+          </Route>
         </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
