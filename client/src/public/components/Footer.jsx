@@ -20,6 +20,7 @@ export const Footer = () => {
                         <Link to="https://twitter.com/habeebmoosadev" target="_blank" rel="noreferrer">
                             <i class="fa-brands fa-square-x-twitter fa-xl"></i>
                         </Link>
+                        <Link to="/admin">Admin</Link>
                     </div>
                     <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                         <li>
