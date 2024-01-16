@@ -105,7 +105,6 @@ export const Navbar = () => {
             <div className="space-y-2 px-2 pb-3 pt-2">
               {navigation.map((item) => (
                 <Link
-
                   to={item.href}
                   className={classNames(
                     item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',

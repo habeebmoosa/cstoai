@@ -22,13 +22,13 @@ export const Footer = () => {
                     </div>
                     <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                         <li>
-                            <Link to="/about" class="mr-4 hover:underline md:mr-6 ">About</Link>
+                            <Link to="/about" class="mr-4 hover:underline md:mr-6">About</Link>
                         </li>
                         <li>
-                            <Link to="/contact" class="hover:underline">Contact</Link>
+                            <Link to="/contact" class="mr-4 hover:underline md:mr-6">Contact</Link>
                         </li>
                         <li>
-                            <Link to="/admin" class="hover:underline">Contact</Link>
+                            <Link to="/admin" class="hover:underline">Admin</Link>
                         </li>
                     </ul>
                 </div>
