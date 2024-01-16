@@ -1,4 +1,5 @@
 import React from "react";
+import favicon from "../../../public/favicon.png";
 
 export const About = () => {
     return (
@@ -11,7 +12,7 @@ export const About = () => {
             </div>
             <div className="right w-full lg:w-1/2">
                 <img
-                    src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxvZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
+                    src={favicon}
                     className="w-full h-auto rounded-lg"
                     alt="About Image"
                 />
