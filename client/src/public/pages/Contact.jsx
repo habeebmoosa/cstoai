@@ -25,6 +25,7 @@ export const Contact = () => {
     return (
         <div className="container mx-auto p-4 flex justify-center m-14">
             <div className="max-w-md w-full">
+                <form onSubmit={sendContactInfo()}>
                 <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-gray-600">Name</label>
@@ -50,11 +51,8 @@ export const Contact = () => {
                         }}
                     ></textarea>
                 </div>
-                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded"
-                    onClick={()=>{
-                        sendContactInfo();
-                    }}
-                >Submit</button>
+                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Submit</button>
+                </form>
             </div>
         </div>
     );
