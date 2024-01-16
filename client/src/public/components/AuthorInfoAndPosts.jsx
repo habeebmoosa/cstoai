@@ -24,6 +24,6 @@ export const AuthorInfoAndPosts = ()=>{
     },[])
 
     return(
-        <ListOfPostPage posts={posts} heading={author.name} description={author.description} author={author.social.facebook}/>
+        <ListOfPostPage posts={posts} heading={author.name} description={author.description} />
     )
 }

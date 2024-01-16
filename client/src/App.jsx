@@ -10,7 +10,7 @@ import { AuthorInfoAndPosts } from './public/components/AuthorInfoAndPosts';
 import { BlogLayout } from './public/layouts/BlogLayout';
 import { ListOfPostBySearch } from './public/components/ListOfPostBySearch';
 import { DashboardLayout } from './admin/layouts/DashboardLayout';
-import { CreatePost } from './admin/pages/createPost';
+import { CreatePost } from './admin/pages/CreatePost';
 import { ListOfPosts } from './admin/pages/ListOfPosts';
 import { EditPost } from './admin/pages/EditPost';
 import { ContactFeedback } from './admin/pages/ContactFeedback';
