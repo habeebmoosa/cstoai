@@ -1,6 +1,3 @@
-import multer from "multer";
-import path from "path";
-
 import { Post } from "../models/post.model.js";
 import { Author } from "../models/author.model.js";
 
@@ -59,40 +56,6 @@ export const readPostsBySearch = async (req, res) => {
 
 
 //Private controllers ----------------------------------------------------------------------------------
-
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, 'public/images/'),
-    filename: (req, file, cb) => {
-        const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${path.extname(file.originalname)}`;
-        cb(null, uniqueName);
-    },
-});
-
-const upload = multer({
-    storage,
-    limits: { fileSize: 1000000 * 100 },
-}).single('myimage');
-
-export const uploadImage = async (req, res) => {
-    try {
-        upload(req, res, async (err) => {
-            if (err) {
-                res.status(500).json({ message: err.message });
-            } else {
-                const imgname = req.file.filename;
-                const imgpath = req.file.path;
-                res.status(201).json({
-                    imgname,
-                    imgpath,
-                    message: 'Image uploaded successfully'
-                });
-            }
-        });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-}
 
 export const createPost = async (req, res) => {
     try {

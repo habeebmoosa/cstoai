@@ -78,7 +78,7 @@ export const ListOfPosts = () => {
                         <div className="flex md:flex-row flex-col p-4 justify-between">
                             <div className="flex md:flex-row flex-col gap-5">
                                 <div className="flex items-center">
-                                    <img src={`${import.meta.env.VITE_API_BASE_URL}/images/${post.imgname}`} alt={post.title} className="w-48 h-auto rounded-lg" />
+                                    <img src={`${import.meta.env.VITE_GET_IMAGE_URL}${post.imgname}${import.meta.env.VITE_IMAGE_VIEW_TOKEN}`} alt={post.title} className="w-48 h-auto rounded-lg" />
                                 </div>
                                 <div className="flex flex-col item-center">
                                     <Link to={"/" + post.url} className="text-lg font-semibold hover:text-gray-700">

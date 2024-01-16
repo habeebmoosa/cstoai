@@ -38,7 +38,7 @@ export const EditPost = () => {
                 setDescription(response.data.description);
                 setContent(response.data.content);
                 setTags(response.data.tags);
-                setImageUrl(`${import.meta.env.VITE_API_BASE_URL}/images/${response.data.imgname}`);
+                setImageUrl(`${import.meta.env.VITE_GET_IMAGE_URL}${response.data.imgname}${import.meta.env.VITE_IMAGE_VIEW_TOKEN}`);
 
             } catch (error) {
                 console.log(error);

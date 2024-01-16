@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Post } from "../components/Post";
+import { storage } from "../../firebase";
+import {ref, uploadBytes} from "firebase/storage";
 
 export const CreatePost = () => {
     const navigate = useNavigate();
@@ -21,31 +23,23 @@ export const CreatePost = () => {
     const [content, setContent] = useState("");
 
     const triggerPost = async (status) => {
+        const imageName = image.name + Date.now();
+        const imagePath = "images/"+imageName;
+
         try {
-
-            const formData = new FormData();
-            formData.append("myimage", image);
-
-            const config = {
-                headers: {
-                    "content-type": "multipart/form-data",
-                    Authorization: `${localStorage.getItem("token")}`,
-                },
-            };
-
-            const res = await Axios.post(
-                `${import.meta.env.VITE_API_BASE_URL}/post/uploadimage`,
-                formData,
-                config
-            );
+            if(image !== null){
+                const imageRef = ref(storage, `images/${imageName}`);
+                const uploadTask = await uploadBytes(imageRef, image);
+                console.log(uploadTask);
+            }
 
 
             await Axios.post(`${import.meta.env.VITE_API_BASE_URL}/post/create`, {
                 status: status,
                 title,
                 description,
-                imgname: res.data.imgname,
-                imgpath: res.data.imgpath,
+                imgname: imageName,
+                imgpath: imagePath,
                 content,
                 tags
             },{
