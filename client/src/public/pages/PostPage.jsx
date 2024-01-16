@@ -37,7 +37,7 @@ export const PostPage = () => {
 
             <div>
                 {post.imgname ? (
-                    <img src={`${import.meta.env.VITE_API_BASE_URL}/images/${post.imgname}`} alt={post.title} className="my-8 rounded-md" />
+                    <img src={`${import.meta.env.VITE_GET_IMAGE_URL}${post.imgname}${import.meta.env.VITE_IMAGE_VIEW_TOKEN}`} alt={post.title} className="my-8 rounded-md" />
                 ) : (
                     <img src={`${import.meta.env.VITE_NOTFOUND_IMAGE}`} alt={post.title} className="my-8 rounded-md" />
                 )}
