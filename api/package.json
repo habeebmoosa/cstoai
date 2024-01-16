@@ -2,11 +2,11 @@
   "name": "blog-api",
   "version": "1.0.1",
   "description": "Habeeb Moosa's Blog",
-  "main": "server.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "Habeeb Moosa",
