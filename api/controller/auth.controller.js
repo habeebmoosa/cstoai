@@ -5,7 +5,9 @@ import { Author } from "../models/author.model.js";
 
 export const signup = async (req, res) => {
     try {
-        const { name, profilePicture, description, username, email, password } = req.body;
+        const { name, profilePicture, description, username, email, password, accessKey } = req.body;
+
+        if(accessKey !== process.env.ACCESS_KEY) return res.status(400).json({ message: "Invalid access key" });
 
         const isAnyAuthors = await Author.find();
         let position = 'author';

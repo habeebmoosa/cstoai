@@ -14,6 +14,7 @@ export const Signup = ()=>{
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [accessKey, setAccessKey] = useState('');
 
 
     const signUp = async () =>{
@@ -22,13 +23,14 @@ export const Signup = ()=>{
                 name,
                 username,
                 email,
-                password
+                password,
+                accessKey
             });
 
             if(response){
                 navigate('/admin/auth/signin');
             }else{
-                alert('Something went wrong');
+                alert('Something went wrong, please try again!');
             }
         }else{
             alert("Password is not same!");
@@ -64,6 +66,11 @@ export const Signup = ()=>{
                 <input type="password" className="sm:w-72 h-10 p-2 rounded-md border" required name="confirmPassword" placeholder="Confirm Password" 
                     onChange={(e)=>{
                         setConfirmPassword(e.target.value);
+                    }}
+                />
+                <input type="password" className="sm:w-72 h-10 p-2 rounded-md border" required name="accessKey" placeholder="Access Key" 
+                    onChange={(e)=>{
+                        setAccessKey(e.target.value);
                     }}
                 />
             </div>
